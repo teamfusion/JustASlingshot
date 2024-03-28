@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.github.teamfusion.just_a_slingshot.mixin.fabric",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "client.ItemRendererMixin"
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "parent": "item/generated",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "just_a_slingshot:item/slingshot"
+  },
+  "base": {
+    "parent": "just_a_slingshot:item/slingshot_front"
+  },
+  "perspectives": {
+    "firstperson_righthand": {
+      "parent": "just_a_slingshot:item/slingshot_back"
+    },
+    "firstperson_lefthand": {
+      "parent": "just_a_slingshot:item/slingshot_back"
+    }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.25
+      },
+      "model": "just_a_slingshot:item/slingshot_shooting_1"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.5
+      },
+      "model": "just_a_slingshot:item/slingshot_shooting_2"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.75
+      },
+      "model": "just_a_slingshot:item/slingshot_shooting_3"
+    }
+  ]
+}

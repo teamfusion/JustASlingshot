@@ -1,0 +1,31 @@
+modLoader = "javafml"
+loaderVersion = "[47,)"
+
+license = "Insert License Here"
+issueTrackerURL = "https://github.com/teamfusion/just_a_slingshot/issues"
+
+[[mods]]
+modId = "just_a_slingshot"
+displayName = "Greed and Bleed"
+
+version = "${version}"
+authors = "Team Fusion"
+
+description = '''
+This is an example description! Tell everyone what your mod is about!
+'''
+#logoFile = ""
+
+[[dependencies.just_a_slingshot]]
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.just_a_slingshot]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
+ordering = "NONE"
+side = "BOTH"

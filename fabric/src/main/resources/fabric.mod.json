@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "just_a_slingshot",
+  "version": "${version}",
+  "name": "Greed and Bleed",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Team Fusion"
+  ],
+  "contact": {
+    "sources": "https://github.com/teamfusion/just_a_slingshot/"
+  },
+  "license": "MIT; Assets licensed as All Rights Reserved",
+  "icon": "assets/just_a_slingshot/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.github.teamfusion.just_a_slingshot.fabric.JustASlingShotFabric"
+    ],
+    "client": [
+      "com.github.teamfusion.just_a_slingshot.fabric.JustASlingShotFabricClient"
+    ],
+    "fabric-datagen": [
+      "com.github.teamfusion.just_a_slingshot.data.DataGeneration"
+    ]
+  },
+  "mixins": [
+    "just_a_slingshot.mixins.json",
+    "just_a_slingshot-common.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.20.1",
+    "fabric-api": ">=0.90.0"
+  }
+}

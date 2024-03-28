@@ -1,0 +1,14 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "just_a_slingshot:item/slingshot_pouch"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "full": 1
+      },
+      "model": "just_a_slingshot:item/slingshot_pouch_full"
+    }
+  ]
+}

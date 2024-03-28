@@ -1,0 +1,18 @@
+{
+  "parent": "item/generated",
+  "loader": "forge:separate_transforms",
+  "textures": {
+    "layer0": "just_a_slingshot:item/slingshot"
+  },
+  "base": {
+    "parent": "just_a_slingshot:item/slingshot_front_shooting_3"
+  },
+  "perspectives": {
+    "firstperson_righthand": {
+      "parent": "just_a_slingshot:item/slingshot_back_shooting_3"
+    },
+    "firstperson_lefthand": {
+      "parent": "just_a_slingshot:item/slingshot_back_shooting_3"
+    }
+  }
+}
