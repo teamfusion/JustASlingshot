@@ -46,7 +46,7 @@ public class CommonSetup {
         SlingshotItem.registerAmmo(Items.SPLASH_POTION, new SlingshotBehavior() {
             @Override
             public float getXRot() {
-                return 10F;
+                return -10F;
             }
 
             @Override
@@ -62,7 +62,7 @@ public class CommonSetup {
         SlingshotItem.registerAmmo(Items.EXPERIENCE_BOTTLE, new SlingshotBehavior() {
             @Override
             public float getXRot() {
-                return 10F;
+                return -10F;
             }
 
             @Override
@@ -91,7 +91,7 @@ public class CommonSetup {
         SlingshotItem.registerAmmo(Items.LINGERING_POTION, new SlingshotBehavior() {
             @Override
             public float getXRot() {
-                return 10F;
+                return -10F;
             }
 
             @Override
