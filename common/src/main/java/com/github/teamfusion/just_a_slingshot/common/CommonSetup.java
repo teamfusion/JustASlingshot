@@ -106,9 +106,6 @@ public class CommonSetup {
         });
 
         SlingshotItem.registerAmmo(Items.ENDER_PEARL, new SlingshotBehavior() {
-            public float getMaxPower() {
-                return 2.0F;
-            }
             @Override
             public Projectile getProjectile(Level level, BlockPos pos, LivingEntity shooter, ItemStack stack, float power) {
                 return new ThrownEnderpearl(level, shooter);
