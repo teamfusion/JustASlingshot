@@ -6,7 +6,7 @@ issueTrackerURL = "https://github.com/teamfusion/just_a_slingshot/issues"
 
 [[mods]]
 modId = "just_a_slingshot"
-displayName = "Greed and Bleed"
+displayName = "Just A Slingshot"
 
 version = "${version}"
 authors = "Team Fusion"
