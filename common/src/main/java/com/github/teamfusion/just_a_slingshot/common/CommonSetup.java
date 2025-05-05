@@ -168,6 +168,7 @@ public class CommonSetup {
         SlingshotItem.registerAmmo(Items.AXOLOTL_BUCKET, new BucketSlingshotBehavior());
         SlingshotItem.registerAmmo(Items.COD_BUCKET, new BucketSlingshotBehavior());
         SlingshotItem.registerAmmo(Items.SALMON_BUCKET, new BucketSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.TADPOLE_BUCKET, new BucketSlingshotBehavior());
     }
 
     public static void onInitialized() {
