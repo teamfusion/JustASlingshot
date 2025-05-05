@@ -15,6 +15,7 @@ public class ClientSetup {
     public static void onBootstrap() {
         JustASlingShotClientNetwork.registerReceivers();
         RenderRegistry.entityModel(EntityTypeRegistry.THROWN_DAMAGEABLE, ThrownItemRenderer::new);
+        RenderRegistry.entityModel(EntityTypeRegistry.THROWN_EYE_OF_ENDER, ThrownItemRenderer::new);
     }
 
     public static void onInitialized() {

@@ -1,29 +1,36 @@
 package com.github.teamfusion.just_a_slingshot.common.entity.projectile;
 
+import com.github.teamfusion.just_a_slingshot.common.item.slingshot.SlingshotBehavior;
+import com.github.teamfusion.just_a_slingshot.common.item.slingshot.SlingshotItem;
 import com.github.teamfusion.just_a_slingshot.common.registry.EntityTypeRegistry;
 import com.github.teamfusion.just_a_slingshot.common.registry.ItemRegistry;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 public class ThrownDamageableEntity extends ThrowableItemProjectile {
     private double baseDamage = 2.0D;
+    @Nullable
+    private SlingshotBehavior slingshotBehavior;
 
     public ThrownDamageableEntity(EntityType<? extends ThrownDamageableEntity> entityType, Level world) {
         super(entityType, world);
@@ -35,6 +42,12 @@ public class ThrownDamageableEntity extends ThrowableItemProjectile {
 
     public ThrownDamageableEntity(Level world, double x, double y, double z) {
         super(EntityTypeRegistry.THROWN_DAMAGEABLE.get(), x, y, z, world);
+    }
+
+    @Override
+    public void setItem(ItemStack itemStack) {
+        super.setItem(itemStack);
+        this.slingshotBehavior = SlingshotItem.getAmmoBehavior(itemStack.getItem());
     }
 
     @Override
@@ -54,8 +67,16 @@ public class ThrownDamageableEntity extends ThrowableItemProjectile {
             if (this.getItem().is(Items.FIRE_CHARGE)) {
                 this.level().explode(this.getOwner(), this.getX(), this.getY(), this.getZ(), 0.8F, Level.ExplosionInteraction.NONE);
             }
-            this.level().broadcastEntityEvent(this, (byte) 3);
-            this.discard();
+            if (slingshotBehavior != null) {
+                if (!slingshotBehavior.bounce(this.getItem()) || hitResult instanceof EntityHitResult) {
+                    this.level().broadcastEntityEvent(this, (byte) 3);
+                    this.discard();
+                }
+            } else {
+                this.level().broadcastEntityEvent(this, (byte) 3);
+                this.discard();
+            }
+
         }
     }
 
@@ -65,6 +86,31 @@ public class ThrownDamageableEntity extends ThrowableItemProjectile {
             if (this.level().getBlockState(blockHitResult.getBlockPos()).is(Blocks.FARMLAND)) {
                 if (blockHitResult.getDirection() == Direction.UP) {
                     this.level().setBlock(blockHitResult.getBlockPos().above(), blockItem.getBlock().defaultBlockState(), 3);
+                }
+            }
+        }
+
+        if (slingshotBehavior != null) {
+            if (slingshotBehavior.bounce(this.getItem())) {
+                if (this.getDeltaMovement().length() < 0.25) {
+                    if (!this.level().isClientSide) {
+                        this.level().broadcastEntityEvent(this, (byte) 3);
+                        this.discard();
+                    }
+                } else {
+                    Vec3i direction = blockHitResult.getDirection().getNormal();
+                    switch (blockHitResult.getDirection()) {
+                        case UP, SOUTH, EAST -> direction = direction.multiply(-1);
+                        default -> {
+                        }
+                    }
+                    direction = new Vec3i(direction.getX() == 0 ? 1 : direction.getX(), direction.getY() == 0 ? 1 : direction.getY(), direction.getZ() == 0 ? 1 : direction.getZ());
+                    this.setDeltaMovement(this.getDeltaMovement().multiply(new Vec3(direction.getX(), direction.getY(), direction.getZ())).scale(0.9F));
+                    this.playSound(SoundEvents.SLIME_ATTACK, 0.5F, 1.0F);
+                }
+            } else {
+                if (slingshotBehavior != null) {
+                    slingshotBehavior.hitBlockBehavior(this.level(), this.blockPosition(), this.getOwner(), this.getItem());
                 }
             }
         }
@@ -80,9 +126,10 @@ public class ThrownDamageableEntity extends ThrowableItemProjectile {
         if (i > 0) {
             entity.hurt(this.damageSources().thrown(this, this.getOwner()), i);
         }
+
         if (entity instanceof LivingEntity living) {
-            if (this.getItem().is(Items.SPIDER_EYE) || this.getItem().is(Items.PUFFERFISH)) {
-                living.addEffect(new MobEffectInstance(MobEffects.POISON, 100), this.getOwner());
+            if (slingshotBehavior != null) {
+                slingshotBehavior.hitEntityBehavior(this.level(), entity.blockPosition(), this.getOwner(), living, this.getItem());
             }
         }
     }

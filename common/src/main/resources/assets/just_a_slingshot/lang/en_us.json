@@ -2,5 +2,7 @@
   "item.just_a_slingshot.slingshot": "Slingshot",
   "item.just_a_slingshot.slingshot_pouch": "Slingshot Pouch",
   "item.just_a_slingshot.pebble": "Pebble",
+  "entity.just_a_slingshot.thrown_damageable_projectile": "Thrown Item",
+  "entity.just_a_slingshot.thrown_eye_of_ender": "Thrown Ey Of Ender",
   "itemGroup.just_a_slingshot": "Just A Slingshot"
 }
