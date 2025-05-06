@@ -11,10 +11,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -141,18 +138,16 @@ public class SlingshotBehavior {
             if (mob2 == null) {
                 return Optional.empty();
             } else {
-                mob2.setBaby(true);
-                if (!mob2.isBaby()) {
-                    return Optional.empty();
-                } else {
-                    mob2.moveTo(vec3.x(), vec3.y(), vec3.z(), 0.0F, 0.0F);
-                    serverLevel.addFreshEntityWithPassengers(mob2);
-                    if (itemStack.hasCustomHoverName()) {
-                        mob2.setCustomName(itemStack.getHoverName());
-                    }
+                mob2.moveTo(vec3.x(), vec3.y(), vec3.z(), 0.0F, 0.0F);
+                mob2.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(mob2.blockPosition()), MobSpawnType.SPAWN_EGG, (SpawnGroupData) null, null);
 
-                    return Optional.of(mob2);
+                serverLevel.addFreshEntityWithPassengers(mob2);
+                if (itemStack.hasCustomHoverName()) {
+                    mob2.setCustomName(itemStack.getHoverName());
                 }
+
+                return Optional.of(mob2);
+
             }
         }
     }

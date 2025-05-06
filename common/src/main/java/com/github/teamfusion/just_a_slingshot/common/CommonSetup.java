@@ -109,12 +109,6 @@ public class CommonSetup {
             }
         });
         SlingshotItem.registerAmmo(Items.POTION, new SlingshotBehavior() {
-            @Override
-            public float getXRot() {
-                return -10F;
-            }
-
-            @Override
             public float getMaxPower() {
                 return 1.5F;
             }
@@ -163,6 +157,24 @@ public class CommonSetup {
         SlingshotItem.registerAmmo(Items.BEETROOT, new FeedSlingshotBehavior());
         SlingshotItem.registerAmmo(Items.WHEAT, new FeedSlingshotBehavior());
         SlingshotItem.registerAmmo(Items.WHEAT_SEEDS, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.BAKED_POTATO, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.GOLDEN_APPLE, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.GOLDEN_CARROT, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.MELON, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.COOKIE, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.CHICKEN, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.COOKED_CHICKEN, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.BEEF, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.COOKED_BEEF, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.PORKCHOP, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.COOKED_PORKCHOP, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.MUTTON, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.COOKED_MUTTON, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.BREAD, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.SUSPICIOUS_STEW, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.MUSHROOM_STEW, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.RABBIT_STEW, new FeedSlingshotBehavior());
+        SlingshotItem.registerAmmo(Items.BEETROOT_SOUP, new FeedSlingshotBehavior());
         SlingshotItem.registerAmmo(Items.TROPICAL_FISH_BUCKET, new BucketSlingshotBehavior());
         SlingshotItem.registerAmmo(Items.PUFFERFISH_BUCKET, new BucketSlingshotBehavior());
         SlingshotItem.registerAmmo(Items.AXOLOTL_BUCKET, new BucketSlingshotBehavior());
