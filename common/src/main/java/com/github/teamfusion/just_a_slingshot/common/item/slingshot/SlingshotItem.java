@@ -36,6 +36,11 @@ public class SlingshotItem extends ProjectileWeaponItem implements Vanishable {
     }
 
 
+    @Override
+    public int getEnchantmentValue() {
+        return 1;
+    }
+
     private boolean startSoundPlayed = false;
 
     public SlingshotItem(Item.Properties properties) {

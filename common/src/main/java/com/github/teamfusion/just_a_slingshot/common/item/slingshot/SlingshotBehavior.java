@@ -1,5 +1,6 @@
 package com.github.teamfusion.just_a_slingshot.common.item.slingshot;
 
+import com.github.teamfusion.just_a_slingshot.api.IHoney;
 import com.github.teamfusion.just_a_slingshot.common.entity.projectile.ThrownDamageableEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -91,8 +92,8 @@ public class SlingshotBehavior {
         if (stack.is(Items.POTION) && PotionUtils.getPotion(stack) == Potions.WATER) {
             target.extinguishFire();
         }
-        if (stack.is(Items.HONEY_BOTTLE)) {
-            target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100), shooter);
+        if (stack.is(Items.HONEY_BOTTLE) && target instanceof IHoney honey) {
+            honey.setJust_a_slingshot$honeyTick(120);
         }
         if (stack.is(Items.CHORUS_FRUIT)) {
             if (!level.isClientSide) {
