@@ -51,8 +51,10 @@ public abstract class LivingEntityMixin extends Entity implements IHoney {
 
     @Inject(method = "aiStep", at = @At("HEAD"))
     public void aiTick(CallbackInfo ci) {
-        this.just_a_slingshot$removeHoney();
-        this.just_a_slingshot$tryAddHoney();
+        if (!this.level().isClientSide()) {
+            this.just_a_slingshot$removeHoney();
+            this.just_a_slingshot$tryAddHoney();
+        }
     }
 
     @Unique
@@ -95,7 +97,7 @@ public abstract class LivingEntityMixin extends Entity implements IHoney {
                 return;
             }
 
-            float f = -0.05F;
+            float f = -0.08F;
             attributeInstance.addTransientModifier(new AttributeModifier(SPEED_MODIFIER_HONEY_UUID, "Honey slow", (double) f, AttributeModifier.Operation.ADDITION));
         }
 
