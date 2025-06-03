@@ -46,6 +46,20 @@
         "pull": 0.25
       },
       "model": "just_a_slingshot:item/slingshot_third_shooting"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.5
+      },
+      "model": "just_a_slingshot:item/slingshot_third_shooting"
+    },
+    {
+      "predicate": {
+        "pulling": 1,
+        "pull": 0.75
+      },
+      "model": "just_a_slingshot:item/slingshot_third_shooting"
     }
   ]
 }

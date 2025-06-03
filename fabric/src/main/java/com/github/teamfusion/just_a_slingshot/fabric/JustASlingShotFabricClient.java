@@ -16,6 +16,12 @@ public class JustASlingShotFabricClient implements ClientModInitializer {
                     new ResourceLocation(JustASlingShot.MOD_ID, "slingshot_back"),
                     "inventory"));
         });
+
+        ModelLoadingRegistry.INSTANCE.registerModelProvider((manager, out) -> {
+            out.accept(new ModelResourceLocation(
+                    new ResourceLocation(JustASlingShot.MOD_ID, "slingshot_third"),
+                    "inventory"));
+        });
     }
 
 
