@@ -13,6 +13,12 @@
     },
     "firstperson_lefthand": {
       "parent": "just_a_slingshot:item/slingshot_back"
+    },
+    "thirdperson_righthand": {
+      "parent": "just_a_slingshot:item/slingshot_third"
+    },
+    "thirdperson_lefthand": {
+      "parent": "just_a_slingshot:item/slingshot_third"
     }
   },
   "overrides": [

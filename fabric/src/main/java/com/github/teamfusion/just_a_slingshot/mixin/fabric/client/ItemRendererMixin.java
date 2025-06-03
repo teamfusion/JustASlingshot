@@ -24,6 +24,9 @@ public class ItemRendererMixin {
     @Unique
     private static final ModelResourceLocation SLINGSHOT_MODEL = new ModelResourceLocation(JustASlingShot.MOD_ID, "slingshot_back", "inventory");
 
+    @Unique
+    private static final ModelResourceLocation SLINGSHOT_MODEL_THIRD = new ModelResourceLocation(JustASlingShot.MOD_ID, "slingshot_third", "inventory");
+
     @Inject(
             method = "render",
             at = @At("HEAD"),
@@ -32,10 +35,25 @@ public class ItemRendererMixin {
     public void render(ItemStack stack, ItemDisplayContext displayContext, boolean leftHanded, PoseStack poseStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay, BakedModel model, CallbackInfo ci) {
         if (!stack.isEmpty()) {
             boolean isFirstPerson = displayContext == ItemDisplayContext.FIRST_PERSON_RIGHT_HAND || displayContext == ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
+            boolean isThirdPerson = displayContext == ItemDisplayContext.THIRD_PERSON_RIGHT_HAND || displayContext == ItemDisplayContext.THIRD_PERSON_LEFT_HAND;
             if (isFirstPerson) {
                 if (stack.is(ItemRegistry.SLINGSHOT.get())) {
                     poseStack.pushPose();
                     BakedModel slingshotModel = Minecraft.getInstance().getModelManager().getModel(SLINGSHOT_MODEL);
+                    model = slingshotModel.getOverrides().resolve(slingshotModel, stack, null, Minecraft.getInstance().player, 0);
+                    model.getTransforms().getTransform(displayContext).apply(leftHanded, poseStack);
+                    poseStack.translate(-0.5F, -0.5F, -0.5F);
+
+                    VertexConsumer vertices = ItemRenderer.getFoilBufferDirect(buffer, Sheets.translucentItemSheet(), true, stack.hasFoil());
+
+                    this.renderModelLists(model, stack, combinedLight, combinedOverlay, poseStack, vertices);
+                    poseStack.popPose();
+                    ci.cancel();
+                }
+            } else if (isThirdPerson) {
+                if (stack.is(ItemRegistry.SLINGSHOT.get())) {
+                    poseStack.pushPose();
+                    BakedModel slingshotModel = Minecraft.getInstance().getModelManager().getModel(SLINGSHOT_MODEL_THIRD);
                     model = slingshotModel.getOverrides().resolve(slingshotModel, stack, null, Minecraft.getInstance().player, 0);
                     model.getTransforms().getTransform(displayContext).apply(leftHanded, poseStack);
                     poseStack.translate(-0.5F, -0.5F, -0.5F);
